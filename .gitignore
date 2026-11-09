@@ -1,0 +1,26 @@
+# Legacy and unused source copies
+old_data/
+phpfiles/
+
+# Runtime lead records and diagnostics
+data/leads/
+data/*.json
+contact.json
+facility_audit_home.json
+facility_audit_popup.json
+resume.json
+
+# Internal setup notes containing credentials or deployment guidance
+README-enquiry-dashboard.md
+UPLOAD-INSTRUCTIONS.txt
+
+# Large archival download files are retained outside Git and must be copied
+# separately if their historical downloads are required.
+img/compliance/
+img/sampark/*.pdf
+data/*.pdf
+data/*.zip
+img/ESG_Report_FY_2024-25
+
+# Local files
+.DS_Store

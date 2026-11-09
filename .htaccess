@@ -1,0 +1,74 @@
+# ============================================================
+# WAF / SECURITY PROVIDER IP WHITELIST (added 2026-10-24)
+# Explicitly allow these ranges. Does not block anyone else.
+# ============================================================
+<IfModule mod_authz_core.c>
+    <RequireAny>
+        Require ip 64.113.48.0/20
+        Require ip 34.228.125.58/32
+        Require ip 20.40.43.216/29
+        Require ip 40.81.65.216/29
+        Require all granted
+    </RequireAny>
+</IfModule>
+
+<IfModule mod_rewrite.c>
+
+    RewriteEngine On
+    RewriteBase /
+
+    # ============================================================
+    # 1. OLD URL REDIRECTS
+    # ============================================================
+
+
+
+
+    # ============================================================
+    # 2. REDIRECT /index TO HOMEPAGE
+    # ============================================================
+
+    RewriteCond %{THE_REQUEST} \s/+index(?:[/?\s]) [NC]
+    RewriteRule ^index/?$ https://dtss.in/ [R=301,L]
+
+
+    # ============================================================
+    # 3. REDIRECT .php URL TO CLEAN URL
+    # Example:
+    # /about.php → /about
+    # ============================================================
+
+    # Never redirect form submissions (a 301 turns POST into GET and loses the data)
+    RewriteCond %{REQUEST_METHOD} !^POST$ [NC]
+    RewriteCond %{THE_REQUEST} \s/+(.+?)\.php(?:[\s?]|$) [NC]
+    RewriteRule ^ /%1 [R=301,L,NE]
+
+
+    # ============================================================
+    # 4. DO NOT REWRITE ERROR PAGE
+    # ============================================================
+
+    RewriteRule ^error\.php$ - [L]
+
+
+    # ============================================================
+    # 5. LOAD PHP FILE WITHOUT .php EXTENSION
+    # Example:
+    # /about → /about.php
+    # ============================================================
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^(.+?)/?$ $1.php [L]
+
+</IfModule>
+
+
+# ============================================================
+# 6. CUSTOM 404 PAGE
+# ============================================================
+
+ErrorDocument 404 /error.php
+RewriteCond %{HTTP_HOST} ^dtss\.in$
+RewriteRule ^dtss\.in$ "https\:\/\/www\.dtss\.in\/" [R=301,L]

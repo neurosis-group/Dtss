@@ -1,0 +1,12 @@
+# SPA fallback: send every non-file request under /demo/ to index.html
+# so React Router can handle the route on the client.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /demo/
+
+  # don't rewrite real files or folders (assets, favicon, etc.)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  RewriteRule . /demo/index.html [L]
+</IfModule>

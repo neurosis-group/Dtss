@@ -1,0 +1,1 @@
+import{n as e,t}from"./jsx-runtime-n5LQ9ujS.js";e();var n=t(),r=()=>(0,n.jsx)(`div`,{children:`Register`});export{r as default};

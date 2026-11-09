@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-n5LQ9ujS.js";import{t}from"./utils-BVnFn5Eh.js";import{w as n}from"./index-ClM2Gcjv.js";var r=e(),i=({id:e,dark:i=!1,className:a,children:o})=>(0,r.jsx)(`section`,{id:e,className:t(`py-16 md:py-24`,i?`bg-ink text-white`:`bg-white text-ink`,a),children:(0,r.jsx)(n,{children:o})});export{i as t};
